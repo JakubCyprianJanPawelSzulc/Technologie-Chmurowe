@@ -1,13 +1,19 @@
 FROM node:16
 
-WORKDIR /app
+ENV NODE_ENV=production
 
-COPY package*.json ./
+WORKDIR /usr/src/app
 
-RUN npm install
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+
+RUN npm install --production --silent
 
 COPY . .
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+RUN chown -R node /usr/src/app
+
+USER node
+
+CMD ["npm", "run", "start"]
