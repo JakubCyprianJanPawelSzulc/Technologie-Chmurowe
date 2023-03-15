@@ -6,6 +6,6 @@ COPY index.html /usr/share/nginx/html/
 
 ENV CONTAINER_IP 172.17.0.2
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD sed -i "s/{CONTAINER_IP}/$CONTAINER_IP/" /etc/nginx/nginx.conf && nginx -g 'daemon off;'
