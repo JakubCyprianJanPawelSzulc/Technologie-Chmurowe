@@ -1,0 +1,4 @@
+docker network create --driver bridge --subnet 192.168.1.0/24 --gateway 192.168.1.1 my_bridge
+docker run --name my_container --network my_bridge -itd ubuntu:latest
+docker exec -it my_container sh -c "apt-get update && apt-get install -y apt-utils && apt-get install -y iputils-ping"
+docker exec -it my_container ping 192.168.1.1
