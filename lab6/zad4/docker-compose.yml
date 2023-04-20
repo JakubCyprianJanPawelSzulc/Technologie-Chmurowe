@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./express_server
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: neo4j:4.4.16-community
+    ports:
+      - "7888:7474"
+      - "7999:7687"
+    restart: unless-stopped
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    volumes:
+      - ./db/data:/data
+      - ./db/conf:/conf
+      - ./db/logs:/logs
+      - ./db/plugins:/plugins
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
