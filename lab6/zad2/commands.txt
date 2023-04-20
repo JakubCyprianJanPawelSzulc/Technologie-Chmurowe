@@ -1,0 +1,3 @@
+docker network create my_network
+docker run --name db --network my_network -e MYSQL_ROOT_PASSWORD=password -d mysql
+docker run --name web --network my_network -d nginx

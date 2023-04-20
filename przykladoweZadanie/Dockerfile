@@ -1,19 +1,19 @@
 FROM alpine:latest
 
-RUN apk add --update --no-cache curl git
+RUN apk add --no-cache \
+    curl \
+    git \
+    nodejs \
+    npm
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-RUN apk add --update nodejs npm
-ARG GIT_REPO
-RUN git clone $GIT_REPO .
-RUN npm install --force
-RUN npm run build
-
+ARG GIT_REPO=https://github.com/JakubCyprianJanPawelSzulc/Projekt-Frontend-Development.git
+RUN git clone $GIT_REPO /app && \
+    cd /app && \
+    npm install --force && \
+    npm run build
 
 FROM nginx:latest
 
-COPY --from=0 /usr/src/app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
