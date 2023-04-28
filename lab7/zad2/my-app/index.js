@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb');
 const app = express();
 
 const url = 'mongodb://db:27017';
-const dbName = 'mydb';
+const dbName = 'myDB';
 const collectionName = 'users';
 
 app.get('/users', async (req, res) => {
