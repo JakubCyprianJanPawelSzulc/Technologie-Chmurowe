@@ -9,7 +9,7 @@ WORKDIR /app
 
 RUN npm install
 
-HEALTHCHECK --interval=30s --timeout=3s \
+HEALTHCHECK --interval=10s --timeout=5s \
   CMD curl -f http://localhost:3000/health || exit 1
 
 CMD ["node", "server.js"]

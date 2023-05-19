@@ -1,0 +1,16 @@
+{
+    "data": [
+     {
+         "_id": "1000",
+         "userId": "1",
+         "productId": "100",
+         "quantity": 1
+     },
+     {
+         "_id": "1001",
+         "userId": "2",
+         "productId": "101",
+         "quantity": 2
+     }
+   ]
+ }
