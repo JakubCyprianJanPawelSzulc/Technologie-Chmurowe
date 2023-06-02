@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mikroserwis-a-deployment
+  labels:
+    app: mikroserwis-a
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mikroserwis-a
+  template:
+    metadata:
+      labels:
+        app: mikroserwis-a
+    spec:
+      containers:
+        - name: mikroserwis-a
+          image: jakubcyprianjanpawelszulc/lab11zad2a:M30B30
+          ports:
+            - containerPort: 3000
