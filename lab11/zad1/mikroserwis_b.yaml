@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mikroserwis-b-service
+spec:
+  selector:
+    app: mikroserwis-b
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mikroserwis-b-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mikroserwis-b
+  template:
+    metadata:
+      labels:
+        app: mikroserwis-b
+    spec:
+      containers:
+        - name: mikroserwis-b
+          image: jakubcyprianjanpawelszulc/lab11zad1b:M57D30
+          ports:
+            - containerPort: 3000
